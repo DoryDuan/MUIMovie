@@ -4,9 +4,8 @@
 	<head>
 		
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<title>首页</title>
-		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="css/style.css" />
 		<style>
@@ -26,7 +25,9 @@
 				height: 90px;
 				margin-right: 10px;
 			}
-			
+			[v-cloak] {
+			  display: none;
+			}
 		</style>
 	</head>
 
@@ -36,53 +37,97 @@
 				<span class="mui-icon mui-icon-search" style="line-height: 30px;color: #AAAAAA;font-size: 16px;"></span>
 				<span style="line-height: 30px;color: #AAAAAA;font-size: 14px;">电影/电视剧/影人</span>
 			</div>
-			<div class="mui-scroll-wrapper" style="top:50px;">
+			<div id="refreshContainer" class="mui-scroll-wrapper" style="top:50px;">
 				<div class="mui-scroll">
-					<ul class="mui-table-view">
-					    <li class="mui-table-view-cell">
+					<ul id="movies" class="mui-table-view" v-cloak>
+					    <li class="mui-table-view-cell" v-for="item in movies" @tap="open_detail(item)">
 					    	<a href="javascript:;">
-					            <img class="mui-pull-left item-img" src="">
+					            <img class="mui-pull-left item-img" :src="item.cover">
 					            <div class="mui-media-body">
-					                <p class='mui-ellipsis dark-big'>羞羞的铁拳</p>
+					                <p class='mui-ellipsis dark-big'>{{item.title}}</p>
 					                <p class="mui-ellipsis">
-					                	<span class="gray-small">喜剧</span>&nbsp;
-										<span class="orange-small">xxx分</span>
+					                	<span class="gray-small">{{item.genres}}</span>&nbsp;
+										<span v-if="item.score>0" class="orange-small">{{item.score}}分</span>
+										<span v-else class="orange-small">暂无评分</span>
 					                </p>
 					                <p class="mui-ellipsis gray-small">
-					                	导演：xxx
+					                	导演：{{item.directors}}
 					                </p>
 					                <p class="mui-ellipsis gray-small">
-					                	主演：xxx
+					                	主演：{{item.casts}}
 					                </p>
 					            </div>
 					        </a>
-					        
-					    	<!--<img src="" class="mui-pull-left item-img" />
-					    	<div>
-					    		<div class="mui-ellipsis dark-big">羞羞的铁拳</div>
-					    		<div class="mui-ellipsis">
-					    			<span class="gray-small">喜剧</span>&nbsp;
-									<span class="orange-small">xxx分</span>
-					    		</div>
-					    		<div class="mui-ellipsis gray-small">
-									导演：xxx
-								</div>
-								<div class="mui-ellipsis gray-small">
-									主演：xxx
-								</div>
-					    	</div>-->
 					    </li>
 					</ul>
 				</div>
 			</div>
 		</div>
 
+		<script src="js/mui.min.js"></script>
 		<script src="js/util.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/mui.jsonp.js"></script>
 		<script type="text/javascript">
+			//Vue数据
+			var data_movies = new Vue({
+				el: '#movies',
+				data: {
+					movies: []
+				}
+			});
 			(function() {
 				mui.init({
-					swipeBack: true //启用右滑关闭功能
+					swipeBack: true, //启用右滑关闭功能
+					pullRefresh : {
+					    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					    down : {
+					      style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+					      auto: true,//可选,默认false.首次加载自动下拉刷新一次
+					      callback :refreshData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					    },
+					    up : {
+					      height:50,//可选.默认50.触发上拉加载拖动距离
+					      auto:true,//可选,默认false.自动上拉加载一次
+					      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+					      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+					      callback :loadMoreData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					    }
+					}
 				});
+				
+				//刷新数据，重新调用接口
+				function refreshData(){
+					//请求热映列表接口
+					mui.getJSONP('https://api.douban.com/v2/movie/in_theaters',{
+						start:0,
+						count:10
+					},function(resp){
+						//清空data_movies.movies里面的数据
+						data_movies.movies.splice(0,data_movies.movies.length);
+						//给data_movies.movies重新赋值
+						data_movies.movies = data_movies.movies.concat(convert(resp.subjects));
+						//下拉刷新结束
+						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+						//重置上拉加载
+						mui('#refreshContainer').pullRefresh().refresh(true);
+						}
+					);
+				}
+				
+				//请求下一页数据
+				function loadMoreData(){
+					//请求热映列表接口
+					mui.getJSONP('https://api.douban.com/v2/movie/in_theaters', {
+						start:data_movies.movies.length,
+						count:10
+					}, function(resp) {
+						data_movies.movies = data_movies.movies.concat(convert(resp.subjects));
+						//结束上拉加载
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh(data_movies.movies.length >= resp.total);
+					});
+				}
+				
 				mui.plusReady(function() {
 					var self = plus.webview.currentWebview()
 
@@ -137,6 +182,61 @@
 			mui('.wrap-search')[0].addEventListener('tap', function() {
 				console.log('tapppp')
 			});
+			
+			//初始化滚动区域
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005, //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				indicators:false
+			});
+			
+			//预加载电影详情页面
+			var detailPage = mui.preload({
+				id:'movie-detail',
+				url:'./html/movie-detail.html'
+			});
+			
+			//打开电影详情页面
+			function open_detail(item){
+				//触发详情页面的movieId事件
+				mui.fire(detailPage,'movieId',{
+					id:item.id
+				});
+				//打开
+				mui.openWindow({
+					id:'movie-detail'
+				});
+			}
+			
+			//数据转换
+			function convert(items) {
+				var newItems = [];
+				//遍历items
+				items.forEach(function(item){
+					var genres = item.genres.join(' / ');
+					//导演
+					var directors = [];
+					for(var i = 0; i < item.directors.length; i++) {
+						directors.push(item.directors[i].name);
+					}
+					//演员
+					directors = directors.join(' / ');
+					var casts = [];
+					for(var i = 0; i < item.casts.length; i++) {
+						casts.push(item.casts[i].name);
+					}
+					casts = casts.join(' / ');
+					newItems.push({
+						id: item.id,
+						title: item.title,
+						genres: genres,
+						cover: item.images.large,
+						score: item.rating.average,
+						directors: directors,
+						casts: casts
+					});
+				})
+				return newItems;
+			}
 		</script>
 	</body>
 

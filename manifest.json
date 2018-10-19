@@ -208,6 +208,18 @@
 								"align": "center",
 								"size": "10px"
 							}
+						},{
+							"tag": "rect",
+							"id": "rectLine",
+							"position": {
+								"top": "0",
+								"left": "0",
+								"width": "100%",
+								"height": "1px"
+							},
+							"rectStyles": {
+								"color":"#ccc"
+							}
 						}
 					]
 				}

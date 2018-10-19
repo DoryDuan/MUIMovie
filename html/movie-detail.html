@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar-nav {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			.top-image-block {
+				text-align: center;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				background: #3C3C3C;
+			}
+			.mui-ellipsis-4 {
+				display: -webkit-box;
+				overflow: hidden;
+				white-space: normal !important;
+				text-overflow: ellipsis;
+				word-wrap: break-word;
+				-webkit-line-clamp: 4;
+				-webkit-box-orient: vertical;
+			}
+			.comment-head-photo {
+				width: 30px;
+				height: 30px;
+				border-radius: 30px;
+			}
+			.mui-table-view {
+				position: relative;
+				margin-top: 0;
+				margin-bottom: 0;
+				padding-left: 0;
+				list-style: none;
+				background-color: #EFEFF4;
+			}
+			.mui-table-view:before {
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: 0;
+				height: 0px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">电影</h1>
+		</header>
+		<div class="mui-content" style="background: white;" id="content">
+		    <div class="top-image-block">
+				<img src="" style="width: 160px;height: 240px;vertical-align: top;" />
+			</div>
+			<div style="padding: 15px;height: 90px;">
+				<div style="float: left;">
+					<span style="display: block;">1</span>
+					<span>1</span>
+					<span style="display: block;">1</span>
+					<!--<span class="dark-big" style="display: block;">{{title}}</span>
+					<span class="gray-small">{{year}} / {{countries.toString().replace(/,/g,' / ')}} / {{genres.toString().replace(/,/g,' / ')}}</span>
+					<span class="gray-small" style="display: block;">{{directors.length>0?directors[0].name:''}}导演作品</span>-->
+				</div>
+				<div style="width: 60px;height: 60px;background: white;float: right;text-align: center;box-shadow: 0px 0px 10px #aaaaaa;">
+					<span style="display: block;">1</span>
+					<span>1</span>
+					<span style="display: block;">1</span>
+					
+					<!--<span class="gray-micro" style="display: block;vertical-align: middle;margin-top: 5px;line-height: 15px;">豆瓣评分</span>
+					<span class="dark-big" style="display: block;line-height: 20px;" v-if="score>0">{{score}}</span>
+					<span class="dark-big" style="display: block;line-height: 20px;" v-else>暂无评分</span>
+					<span class="gray-micro" style="display: block;line-height: 15px;">{{ratingCount}}人</span>-->
+				</div>
+			</div>
+			<div style="height: 0.5px;background: #A2A2A2;margin-left: 15px;"></div>
+			<p class="gray-small" style="margin: 10px 0px 0px 15px;">剧情简介</p>
+			<p class="dark-medium mui-ellipsis-4" style="margin: 0px 15px 0px 15px;">{{summary}}</p>
+			<p class="gray-small" style="margin: 10px 0px 0px 15px;">演员</p>
+			<div style="overflow-x: scroll;white-space: nowrap;padding-left: 15px;">
+				<!--<div v-for="item in casts" style="display: inline-block;" @click="open_detail(item)">
+					<img :src="item.avatars.medium" style="width: 70px;height: 100px;margin-right: 10px;" />
+					<div class="dark-micro mui-ellipsis" style="width: 70px;text-align: center;">{{item.name}}</div>
+				</div>-->
+			</div>
+			<p class="dark-medium" style="margin-top: 10px;text-align: center;background: #E6E6E6;line-height: 40px;">评论</p>
+			<ul class="mui-table-view" style="background: white;">
+				<li class="mui-table-view-cell">
+					<img src="../images/icon_commentphoto.jpg" class="comment-head-photo mui-pull-left" />
+					<div class="mui-media-body">
+						<span class="dark-medium" style="line-height: 30px;text-align: center;margin-left: 10px;">Hello World</span>
+						<span class="gray-medium" style="line-height: 30px; text-align: center;float: right;">2017-12-30</span>
+					</div>
+					<p class="dark-medium" style="margin-left: 40px;">
+						这部电影非常棒！
+					</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<img src="../images/icon_commentphoto.jpg" class="comment-head-photo mui-pull-left" />
+					<div class="mui-media-body">
+						<span class="dark-medium" style="line-height: 30px;text-align: center;margin-left: 10px;">Hello World</span>
+						<span class="gray-medium" style="line-height: 30px; text-align: center;float: right;">2017-12-30</span>
+					</div>
+					<p class="dark-medium" style="margin-left: 40px;">
+						这部电影非常棒！
+					</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<img src="../images/icon_commentphoto.jpg" class="comment-head-photo mui-pull-left" />
+					<div class="mui-media-body">
+						<span class="dark-medium" style="line-height: 30px;text-align: center;margin-left: 10px;">Hello World</span>
+						<span class="gray-medium" style="line-height: 30px; text-align: center;float: right;">2017-12-30</span>
+					</div>
+					<p class="dark-medium" style="margin-left: 40px;">
+						这部电影非常棒！
+					</p>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			//默认数据
+			function getDefaultData(){
+				return{
+					title:'',
+					cover:'',
+					score:'',
+					ratingCount:'',
+					summary:'',
+					countries:'',
+					year:'',
+					genres:'',
+					casts:[],
+					directors:[]
+				}
+			}
+			//添加movieId自定义事件
+			window.addEventListener("movieId", function(event) {
+				//获取事件参数
+				var id = event.detail.id;
+				console.log(id);
+			});
+		</script>
+	</body>
+
+</html>
