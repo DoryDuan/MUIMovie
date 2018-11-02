@@ -210,7 +210,7 @@
 							}
 						},{
 							"tag": "rect",
-							"id": "rectLine",
+							"id": "tabBorder",
 							"position": {
 								"top": "0",
 								"left": "0",

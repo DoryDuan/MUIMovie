@@ -24,3 +24,20 @@
 ## 使用教程
 
 [教程参考](http://ask.dcloud.net.cn/article/12602)
+
+# 笔记
+## mui
+1.[制作主页tab](http://ask.dcloud.net.cn/article/12602)
+新建app项目的时候，选择底部选项卡模板。
+修改manifest文件里面的subNViews下面的tags中的text,left,width,backgroundColor
+修改utils.js里面的options下面的subpages对应的页面，tab数量修改
+修改index.html里面tab对应部分的内容
+
+## css样式
+1.图片下面会有空隙。设置vertical-align: top/bottom;
+2.文字垂直水平居中。父元素：{display: table;}，子元素(包裹文字的元素){display: table-cell;vertical-align: middle;}
+
+
+## 问题
+1.底部tab分割线有问题
+2.配置下拉刷新以后，在真机上运行滚动不了

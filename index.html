@@ -81,11 +81,11 @@
 					swipeBack: true, //启用右滑关闭功能
 					pullRefresh : {
 					    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-					    down : {
-					      style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-					      auto: true,//可选,默认false.首次加载自动下拉刷新一次
-					      callback :refreshData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-					    },
+//					    down : {
+//					      style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+//					      auto: false,//可选,默认false.首次加载自动下拉刷新一次
+//					      callback :refreshData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//					    },
 					    up : {
 					      height:50,//可选.默认50.触发上拉加载拖动距离
 					      auto:true,//可选,默认false.自动上拉加载一次
@@ -135,7 +135,7 @@
 					var aniShow = {};
 					util.initSubpage(aniShow);
 					
-					var 	nview = plus.nativeObj.View.getViewById('tabBar'),
+					var nview = plus.nativeObj.View.getViewById('tabBar'),
 						activePage = plus.webview.currentWebview(),
 						targetPage,
 						subpages = util.options.subpages,
