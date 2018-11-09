@@ -35,7 +35,7 @@
 
 ## css样式
 1.图片下面会有空隙。设置vertical-align: top/bottom;
-2.文字垂直水平居中。父元素：{display: table;}，子元素(包裹文字的元素){display: table-cell;vertical-align: middle;}
+2.文字垂直水平居中。父元素：{display: table;}，子元素(包裹文字的元素){display: table-cell;vertical-align: middle;text-align: center;}
 
 
 ## 问题

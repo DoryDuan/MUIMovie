@@ -161,7 +161,7 @@
 		<script type="text/javascript">
 			mui.init();
 			mui('.mui-slider').slider({
-				interval: 4000 //自动轮播周期 默认0，这里3s
+				interval: 3000 //自动轮播周期 默认0，这里3s
 			});
 			//vue对象，数据
 			var data_movies = new Vue({
@@ -208,6 +208,29 @@
 				});
 				return newItems;
 			}
+			
+			//给Top250添加点击事件
+			mui('#billboard_top')[0].addEventListener('tap',function(){
+				mui.openWindow({
+					url:'./billboard-top.html',
+					id:'billboard-top',
+					waiting:{
+						autoShow:true,
+						title:'正在加载...'
+					}
+				});
+			});
+			//给北美票房榜添加点击事件
+			mui('#billboard_box')[0].addEventListener('tap',function(){
+				mui.openWindow({
+					url:'./billboard-box.html',
+					id:'billboard-box',
+					waiting:{
+						autoShow:true,
+						title:'正在加载...'
+					}
+				});
+			});
 		</script>
 	</body>
 

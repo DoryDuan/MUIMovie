@@ -59,16 +59,8 @@
 				position: relative;
 				padding: 10px 0px 0px 15px;
 			}
-			.summary-title:before{
-				position: absolute;
-			    right: 0;
-			    top: 0;
-			    left: 15px;
-			    height: 1px;
-			    content: '';
-			    -webkit-transform: scaleY(.5);
-			    transform: scaleY(.5);
-			    background-color: #c8c7cc;
+			.border-cell:before{
+				left: 15px;
 			}
 		</style>
 	</head>
@@ -96,7 +88,7 @@
 				</div>
 			</div>
 			<!--<div style="height: 0.5px;background: #A2A2A2;margin-left: 15px;"></div>-->
-			<p class="gray-small summary-title">剧情简介</p>
+			<p class="gray-small summary-title border-cell">剧情简介</p>
 			<p class="dark-medium mui-ellipsis-4" style="margin: 0px 15px 0px 15px;">{{summary}}</p>
 			<p class="gray-small" style="margin: 10px 0px 0px 15px;">演员</p>
 			<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="height: 121px;">
@@ -187,7 +179,10 @@
 							url:'./cast-detail.html',
 							extras:{
 								castId:item.id
-							}
+							},
+						   	waiting:{
+						   		 title:'加载中'
+						   	}
 						});
 					}
 				}
