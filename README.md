@@ -37,7 +37,14 @@
 1.图片下面会有空隙。设置vertical-align: top/bottom;
 2.文字垂直水平居中。父元素：{display: table;}，子元素(包裹文字的元素){display: table-cell;vertical-align: middle;text-align: center;}
 
-
 ## 问题
 1.底部tab分割线有问题
 2.配置下拉刷新以后，在真机上运行滚动不了
+
+## h5+
+1.本地数据存储plus.storage
+2.清除缓存
+[plus.cache](http://www.dcloud.io/docs/api/zh_cn/cache.html)
+
+## 打包上线
+[android证书生成](https://ask.dcloud.net.cn/article/13045)

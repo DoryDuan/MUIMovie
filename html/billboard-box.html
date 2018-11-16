@@ -48,28 +48,28 @@
 		</header>
 		<div class="mui-content">
 		    <ul id="list" style="list-style: none;padding-left: 1px;margin-top: 0px;background: white;">
-			        	<li v-for="item in list" @click="open_detail(item)">
-			        		<div style="text-align: center;">
-			        			<div class="line"></div>
-			        			<div class="top-index">{{item.sort}}</div>
-			        			<div class="line"></div>
-			        		</div>
-			        		<div class="card">
-			        			<img :src="item.cover" class="mui-pull-left" style="width: 70px;height: 95px;margin-right: 10px;"/>
-			        			<div class="dark-big">{{item.title}}</div>
-			        			<div style="line-height: 20px;">
-			        				<span class="gray-small">豆瓣评分：</span><span class="orange-small">{{item.score}}分</span>
-			        			</div>
-			        			<span class="gray-small mui-ellipsis" style="display: block;line-height: 20px;">
-			        				导演：{{item.directorsStr}}
-			        			</span>
-			        			<span class="gray-small mui-ellipsis" style="display: block;line-height: 20px;">
-			        				演员：{{item.castsStr}}
-			        			</span>
-			        		</div>
-			        		<span class="dark-medium" style="margin-left: 15px;margin-top: 10px;display: block;">票房{{item.box/10000}}万美元</span>
-			        	</li>
-			        </ul>
+	        	<li v-for="item in list" @click="open_detail(item)">
+	        		<div style="text-align: center;">
+	        			<div class="line"></div>
+	        			<div class="top-index">{{item.sort}}</div>
+	        			<div class="line"></div>
+	        		</div>
+	        		<div class="card">
+	        			<img :src="item.cover" class="mui-pull-left" style="width: 70px;height: 95px;margin-right: 10px;"/>
+	        			<div class="dark-big">{{item.title}}</div>
+	        			<div style="line-height: 20px;">
+	        				<span class="gray-small">豆瓣评分：</span><span class="orange-small">{{item.score}}分</span>
+	        			</div>
+	        			<span class="gray-small mui-ellipsis" style="display: block;line-height: 20px;">
+	        				导演：{{item.directorsStr}}
+	        			</span>
+	        			<span class="gray-small mui-ellipsis" style="display: block;line-height: 20px;">
+	        				演员：{{item.castsStr}}
+	        			</span>
+	        		</div>
+	        		<span class="dark-medium" style="margin-left: 15px;margin-top: 10px;display: block;">票房{{item.box/10000}}万美元</span>
+	        	</li>
+	        </ul>
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/vue.min.js"></script>

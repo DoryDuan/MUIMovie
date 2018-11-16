@@ -180,7 +180,10 @@
 			
 			//给搜索框添加点击事件
 			mui('.wrap-search')[0].addEventListener('tap', function() {
-				console.log('tapppp')
+				mui.openWindow({
+					id:'search',
+					url:'./html/search.html'
+				});
 			});
 			
 			//初始化滚动区域
